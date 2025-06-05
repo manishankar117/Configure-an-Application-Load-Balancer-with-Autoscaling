@@ -146,7 +146,7 @@ gcloud compute routers nats create "${NAT_GW_NAME}" \
 echo "NAT Gateway ${NAT_GW_NAME} configuration attempted. Waiting for it to become RUNNING..."
 
 NAT_STATUS=""
-TIMEOUT_SECONDS=300 # 5 minutes
+TIMEOUT_SECONDS=120 # 2 minutes
 ELAPSED_SECONDS=0
 while [ "$NAT_STATUS" != "RUNNING" ] && [ "$ELAPSED_SECONDS" -lt "$TIMEOUT_SECONDS" ]; do
     echo "Waiting for NAT Gateway ${NAT_GW_NAME} to be RUNNING... (${ELAPSED_SECONDS}s / ${TIMEOUT_SECONDS}s)"
