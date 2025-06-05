@@ -350,15 +350,6 @@ gcloud compute target-http-proxies create "${LB_NAME}-proxy" \
 echo "Creating Global Forwarding Rule (IPv4) ${LB_NAME}-fw-ipv4..."
 gcloud compute forwarding-rules create "${LB_NAME}-fw-ipv4" \
     --project="${PROJECT_ID}" \
-    --address-ip-version=IPV4 \
-    --target-http-proxy="${LB_NAME}-proxy" \
-    --ports=80 \
-    --global \
-    --quiet || echo "Forwarding rule ${LB_NAME}-fw-ipv4 might already exist or failed to create."
-
-echo "Creating Global Forwarding Rule (IPv4) ${LB_NAME}-fw-ipv4..."
-gcloud compute forwarding-rules create "${LB_NAME}-fw-ipv4" \
-    --project="${PROJECT_ID}" \
     --ip-version=IPV4 \
     --target-http-proxy="${LB_NAME}-proxy" \
     --ports=80 \
