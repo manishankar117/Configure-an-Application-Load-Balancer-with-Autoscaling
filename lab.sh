@@ -305,7 +305,7 @@ gcloud compute backend-services create "${BACKEND_SERVICE_NAME}" \
     --project="${PROJECT_ID}" \
     --protocol=HTTP \
     --health-checks="${MIG_HEALTH_CHECK_NAME}" \
-    --health-checks-global \
+    --global-health-checks \
     --enable-logging \
     --logging-sample-rate=1 \
     --global \
