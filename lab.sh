@@ -32,6 +32,13 @@ while [[ -z "$USER_MIG_NOTUS_REGION" || "$USER_MIG_NOTUS_REGION" == "$NAT_REGION
 done
 export MIG_NOTUS_REGION="${USER_MIG_NOTUS_REGION}"
 
+read -p "Enter the zone for webserver (e.g., us-central1-c): " WEBSERVER_ZONE_1
+while [[ -z "$WEBSERVER_ZONE_1" ]]; do
+    echo "Primary zone cannot be empty."
+    read -p "Enter the zone region (e.g., us-central1-c): " WEBSERVER_ZONE_1
+done
+export WEBSERVER_ZONE_1="${WEBSERVER_ZONE_1}" # Zone for the initial webserver VM
+
 # Prompt for Stress Test VM Region
 DEFAULT_STRESS_REGION="us-east1" # Default suggestion
 if [ "$NAT_REGION_1" == "us-east1" ]; then # Avoid suggesting the same region as primary
@@ -70,7 +77,6 @@ export NAT_ROUTER_NAME="nat-router-${NAT_REGION_1}" # Derived from user input
 
 # Task 3: Custom Image
 export WEBSERVER_VM_NAME="webserver"
-export WEBSERVER_ZONE_1="${NAT_REGION_1}-a" # Zone for the initial webserver VM (derived, assumes '-a' is valid)
 export CUSTOM_IMAGE_NAME="mywebserver"
 export WEBSERVER_MACHINE_TYPE="e2-micro"
 
