@@ -350,17 +350,28 @@ gcloud compute forwarding-rules create "${LB_NAME}-fw-ipv4" \
     --global \
     --quiet || echo "Forwarding rule ${LB_NAME}-fw-ipv4 might already exist or failed to create."
 
+echo "Creating Global Forwarding Rule (IPv4) ${LB_NAME}-fw-ipv4..."
+gcloud compute forwarding-rules create "${LB_NAME}-fw-ipv4" \
+    --project="${PROJECT_ID}" \
+    --ip-version=IPV4 \
+    --load-balancing-scheme=EXTERNAL_MANAGED \
+    --target-http-proxy="${LB_NAME}-proxy" \
+    --ports=80 \
+    --global \
+    --quiet || echo "Forwarding rule ${LB_NAME}-fw-ipv4 might already exist or failed to create."
+
 echo "Creating Global Forwarding Rule (IPv6) ${LB_NAME}-fw-ipv6..."
 gcloud compute forwarding-rules create "${LB_NAME}-fw-ipv6" \
     --project="${PROJECT_ID}" \
-    --address-ip-version=IPV6 \
+    --ip-version=IPV6 \
+    --load-balancing-scheme=EXTERNAL_MANAGED \
     --target-http-proxy="${LB_NAME}-proxy" \
     --ports=80 \
     --global \
     --quiet || echo "Forwarding rule ${LB_NAME}-fw-ipv6 might already exist or failed to create."
+
 echo "Application Load Balancer ${LB_NAME} configuration attempted. It may take several minutes to become fully active."
 echo "--------------------------------------------------"
-
 echo "TASK 6: Stress test the Application Load Balancer (HTTP)"
 echo "Fetching Load Balancer IPv4 address..."
 export LB_IP_v4=""
